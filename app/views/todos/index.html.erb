@@ -1,0 +1,42 @@
+<h2 class="mb-4"><i class="bi bi-list-task me-2"></i>Your ToDos</h2>
+
+<%= link_to "New ToDo", new_todo_path, class: "btn btn-primary mb-3" %>
+
+<% if @todos.any? %>
+  <ul class="list-group">
+    <% @todos.each do |todo| %>
+      <li class="list-group-item d-flex justify-content-between align-items-center 
+          <%= 'todo-priority' if todo.priority %> 
+          <%= 'todo-completed' if todo.completed %>">
+        
+        <div>
+          <strong>
+            <%= link_to todo.title, todo_path(todo), class: "text-decoration-none text-primary" %>
+          </strong>
+
+          <% if todo.priority %>
+            <span class="badge bg-danger ms-2">High Priority</span>
+          <% end %>
+
+          <% if todo.completed %>
+            <span class="badge bg-success ms-2">Completed</span>
+          <% end %>
+
+          <br>
+          <small class="text-muted">
+            Category: <%= todo.category.name %>
+          </small>
+        </div>
+
+        <div>
+          <%= link_to "Edit", edit_todo_path(todo), class: "btn btn-sm btn-outline-secondary me-1" %>
+          <%= link_to "Done", todo_path(todo), 
+                data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, 
+                class: "btn btn-sm btn-outline-danger" %>
+        </div>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>You have no ToDos yet.</p>
+<% end %>

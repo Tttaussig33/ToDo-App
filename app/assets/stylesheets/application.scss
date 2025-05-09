@@ -1,0 +1,98 @@
+@import "bootstrap"; 
+body {
+  background-color: #e6dcdc;
+  font-family: "Segoe UI", sans-serif;
+}
+
+.navbar-brand {
+  font-weight: bold;
+  color: #007bff;
+  font-size: 2.5rem;
+}
+.nav-item {
+  padding: 0 10px;
+}
+
+.navbar {
+  padding: 5px;
+
+  border-radius: 6px;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 100%;
+}
+
+.todo-completed-title {
+  text-decoration: line-through;
+  color: #828c96;
+}
+
+
+.todo-priority {
+  border-left: 5px solid #dc3545;
+  padding-left: 10px;
+}
+
+.list-group {
+  background-color: rgb( 33, 37, 41);
+  margin-top: 20px;
+  font-size: 1rem;
+  color:#f8f9fa;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 80%;
+
+}
+.list-group-item {
+  background-color: transparent;
+  border: none;
+  color:#f8f9fa;
+  padding: 30px;
+}
+
+.text-muted {
+  color: #828c96 !important;
+}
+
+.card {
+  background-color: rgb( 33, 37, 41);
+  margin-top: 20px;
+  font-size: 1rem;
+  color:#f8f9fa;
+}
+
+.form-control {
+  background-color: transparent
+}
+
+.container {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.text-decoration-none{
+  font-size: 1.5rem;
+}
+
+.navbar-logo-hover:hover {
+  opacity: 0.7;
+  transform: scale(1.05);
+  transition: all 0.2s ease-in-out;
+}
+
+
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS (and SCSS, if configured) file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */

@@ -1,0 +1,23 @@
+<h2 class="mb-4"><i class="bi bi-check2-square me-2"></i>Completed ToDos</h2>
+
+<%= link_to "Back to All ToDos", todos_path, class: "btn btn-secondary mb-3" %>
+
+<% if @todos.any? %>
+  <ul class="list-group">
+    <% @todos.each do |todo| %>
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+  <div>
+    <strong class="todo-completed-title"><%= link_to todo.title, todo_path(todo), class: "text-decoration-none" %></strong><br>
+
+          <small class="text-muted">Category: <%= todo.category.name %></small>
+        </div>
+        <div class="d-flex gap-2">
+          <%= link_to "Edit", edit_todo_path(todo), class: "btn btn-sm btn-outline-secondary" %>
+          <%= link_to "Delete", todo_path(todo), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-sm btn-outline-danger" %>
+        </div>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>You have no completed ToDos yet.</p>
+<% end %>

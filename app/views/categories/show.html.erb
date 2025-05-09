@@ -1,0 +1,54 @@
+<h2 class="mb-3">
+  <i class="bi bi-tag me-2"></i><%= @category.name %>
+</h2>
+
+<p><%= @category.description %></p>
+
+<hr>
+
+<h4 class="mt-4">
+  <i class="bi bi-list-check me-2"></i>ToDos in this Category
+</h4>
+
+<% if @todos.any? %>
+  <ul class="list-group mb-4">
+  <% @todos.each do |todo| %>
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+      <div>
+        <%= link_to todo.title, todo_path(todo), class: "text-decoration-none text-primary fw-semibold" %>
+
+        <% if todo.priority %>
+          <span class="badge bg-danger ms-2">High Priority</span>
+        <% end %>
+      </div>
+
+      <div class="d-flex align-items-center gap-2">
+        <%= link_to edit_todo_path(todo), class: "btn btn-sm btn-outline-primary" do %>
+          <i class="bi bi-pencil"></i>
+        <% end %>
+
+        <%= link_to todo_path(todo),
+            data: { turbo_method: :delete, turbo_confirm: "Delete this ToDo?" },
+            class: "btn btn-sm btn-outline-danger" do %>
+          <i class="bi bi-trash"></i>
+        <% end %>
+      </div>
+    </li>
+  <% end %>
+</ul>
+
+<% else %>
+  <p class="text-muted">No ToDos yet.</p>
+<% end %>
+
+<div class="d-flex gap-2">
+  <%= link_to edit_category_path(@category), class: "btn btn-outline-primary" do %>
+    <i class="bi bi-pencil-square me-1"></i> Edit
+  <% end %>
+
+  <%= link_to category_path(@category),
+        data: { turbo_method: :delete, turbo_confirm: "Delete this category and all associated ToDos?" },
+        class: "btn btn-outline-danger" do %>
+    <i class="bi bi-trash me-1"></i> Delete
+  <% end %>
+</div>
