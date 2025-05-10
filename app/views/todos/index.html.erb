@@ -1,42 +1,56 @@
-<h2 class="mb-4"><i class="bi bi-list-task me-2"></i>Your ToDos</h2>
+<%= turbo_stream_from "todos" %>
 
+<h2 class="mb-4"><i class="bi bi-list-task me-2"></i>Your ToDos</h2>
 <%= link_to "New ToDo", new_todo_path, class: "btn btn-primary mb-3" %>
 
-<% if @todos.any? %>
-  <ul class="list-group">
-    <% @todos.each do |todo| %>
-      <li class="list-group-item d-flex justify-content-between align-items-center 
-          <%= 'todo-priority' if todo.priority %> 
-          <%= 'todo-completed' if todo.completed %>">
-        
-        <div>
-          <strong>
-            <%= link_to todo.title, todo_path(todo), class: "text-decoration-none text-primary" %>
-          </strong>
+<% completed = @todos.select(&:completed).count %>
+<% total = @todos.count %>
+<% percent_complete = total > 0 ? (completed * 100 / total) : 0 %>
+<% bar_class = percent_complete >= 80 ? 'bg-success' : percent_complete >= 50 ? 'bg-warning' : 'bg-danger' %>
 
-          <% if todo.priority %>
-            <span class="badge bg-danger ms-2">High Priority</span>
-          <% end %>
+<div class="mb-4">
+  <label class="form-label">Progress</label>
+  <div class="progress" style="height: 24px;">
+    <div class="progress-bar <%= bar_class %>" role="progressbar" style="width: <%= percent_complete %>%;">
+      <%= completed %> / <%= total %> completed
+    </div>
+  </div>
+</div>
 
-          <% if todo.completed %>
-            <span class="badge bg-success ms-2">Completed</span>
-          <% end %>
-
-          <br>
-          <small class="text-muted">
-            Category: <%= todo.category.name %>
-          </small>
-        </div>
-
-        <div>
-          <%= link_to "Edit", edit_todo_path(todo), class: "btn btn-sm btn-outline-secondary me-1" %>
-          <%= link_to "Done", todo_path(todo), 
-                data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, 
-                class: "btn btn-sm btn-outline-danger" %>
-        </div>
-      </li>
-    <% end %>
-  </ul>
-<% else %>
-  <p>You have no ToDos yet.</p>
-<% end %>
+<div id="todos">
+  <% if @todos.any? %>
+    <ul class="list-group">
+      <% @todos.each do |todo| %>
+        <li class="list-group-item d-flex justify-content-between align-items-center
+            <%= 'todo-priority' if todo.priority %>
+            <%= 'todo-completed' if todo.completed %>">
+          <div>
+            <%= form_with model: todo, method: :patch, data: { turbo_stream: true }, class: "d-inline" do |f| %>
+              <%= f.check_box :completed, checked: todo.completed,
+                              onchange: 'this.form.submit();',
+                              class: "form-check-input me-2" %>
+            <% end %>
+            <strong>
+              <%= link_to todo.title, todo_path(todo), class: "text-decoration-none" %>
+            </strong><br>
+            <small class="text-muted">
+              Category: <%= todo.category.name %>
+              <%= "| Priority" if todo.priority %>
+              <%= "| Completed" if todo.completed %>
+            </small>
+          </div>
+          <div>
+            <%= link_to "Edit", edit_todo_path(todo),
+                        class: "btn btn-sm btn-outline-secondary me-1" %>
+            <%= link_to "Delete", todo_path(todo),
+                        method: :delete,
+                        data: { confirm: "Are you sure?" },
+                        class: "btn btn-sm btn-outline-danger" %>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p>You have no ToDos yet.</p>
+  <% end %>
+</div>

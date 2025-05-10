@@ -39,7 +39,16 @@ class TodosController < ApplicationController
   # PATCH/PUT /todos/1
   def update
     if @todo.update(todo_params)
-      redirect_to @todo, notice: "Todo was successfully updated."
+      respond_to do |format|
+        format.html { redirect_to todos_path, notice: "Todo was successfully updated." }
+        format.turbo_stream do
+          if @todo.completed?
+            render turbo_stream: turbo_stream.remove(dom_id(@todo))
+          else
+            render turbo_stream: turbo_stream.replace(@todo, partial: "todos/todo", locals: { todo: @todo })
+          end
+        end
+      end
     else
       render :edit, status: :unprocessable_entity
     end
