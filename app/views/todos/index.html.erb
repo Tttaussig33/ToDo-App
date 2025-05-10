@@ -3,27 +3,18 @@
 <h2 class="mb-4"><i class="bi bi-list-task me-2"></i>Your ToDos</h2>
 <%= link_to "New ToDo", new_todo_path, class: "btn btn-primary mb-3" %>
 
-<% completed = @todos.select(&:completed).count %>
-<% total = @todos.count %>
-<% percent_complete = total > 0 ? (completed * 100 / total) : 0 %>
-<% bar_class = percent_complete >= 80 ? 'bg-success' : percent_complete >= 50 ? 'bg-warning' : 'bg-danger' %>
-
-<div class="mb-4">
-  <label class="form-label">Progress</label>
-  <div class="progress" style="height: 24px;">
-    <div class="progress-bar <%= bar_class %>" role="progressbar" style="width: <%= percent_complete %>%;">
-      <%= completed %> / <%= total %> completed
-    </div>
-  </div>
+<div id="progress_bar">
+  <%= render partial: "progress_bar", locals: { todos: @todos } %>
 </div>
 
 <div id="todos">
   <% if @todos.any? %>
     <ul class="list-group">
       <% @todos.each do |todo| %>
-        <li class="list-group-item d-flex justify-content-between align-items-center
+        <li id="<%= dom_id(todo) %>" class="list-group-item d-flex justify-content-between align-items-center
             <%= 'todo-priority' if todo.priority %>
             <%= 'todo-completed' if todo.completed %>">
+
           <div>
             <%= form_with model: todo, method: :patch, data: { turbo_stream: true }, class: "d-inline" do |f| %>
               <%= f.check_box :completed, checked: todo.completed,

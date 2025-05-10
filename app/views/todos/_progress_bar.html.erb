@@ -1,0 +1,13 @@
+<div id="progress_bar">
+  <% completed = todos.select(&:completed).count %>
+  <% total = todos.count %>
+  <% percent_complete = total > 0 ? (completed * 100 / total) : 0 %>
+  <% bar_class = percent_complete >= 80 ? 'bg-success' : percent_complete >= 50 ? 'bg-warning' : 'bg-danger' %>
+
+  <label class="form-label">Progress</label>
+  <div class="progress" style="height: 24px;">
+    <div class="progress-bar <%= bar_class %>" role="progressbar" style="width: <%= percent_complete %>%;">
+      <%= completed %> / <%= total %> completed
+    </div>
+  </div>
+</div>

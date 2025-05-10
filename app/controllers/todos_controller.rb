@@ -1,4 +1,6 @@
 class TodosController < ApplicationController
+  include ActionView::RecordIdentifier  # <-- Add this line
+
   before_action :require_login
   before_action :set_todo, only: %i[show edit update destroy]
 
@@ -39,20 +41,13 @@ class TodosController < ApplicationController
   # PATCH/PUT /todos/1
   def update
     if @todo.update(todo_params)
-      respond_to do |format|
-        format.html { redirect_to todos_path, notice: "Todo was successfully updated." }
-        format.turbo_stream do
-          if @todo.completed?
-            render turbo_stream: turbo_stream.remove(dom_id(@todo))
-          else
-            render turbo_stream: turbo_stream.replace(@todo, partial: "todos/todo", locals: { todo: @todo })
-          end
-        end
-      end
+      redirect_to @todo, notice: "Todo was successfully updated."
     else
       render :edit, status: :unprocessable_entity
     end
   end
+
+
 
   # DELETE /todos/1
   def destroy

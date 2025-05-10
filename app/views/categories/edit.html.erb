@@ -1,6 +1,6 @@
 <h2><%= @category.new_record? ? "New Category" : "Edit Category" %></h2>
 
-<%= form_with model: @category, local: true do |form| %>
+<%= form_with model: @category do |form| %>
   <div class="mb-3">
     <%= form.label :name, class: "form-label" %>
     <%= form.text_field :name, class: "form-control" %>
