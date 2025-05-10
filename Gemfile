@@ -5,8 +5,16 @@ gem "rails", "~> 7.2.2", ">= 7.2.2.1"
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"
 # Use postgresql as the database for Active Record
-gem "pg", "~> 1.1"
-# Use the Puma web server [https://github.com/puma/puma]
+# Use postgresql as the database for Active Record in development and test
+group :development, :test do
+  gem "pg", "~> 1.1"
+end
+
+# Use sqlite3 in production
+group :production do
+  gem "sqlite3", "~> 1.4"
+end
+
 gem "puma", ">= 5.0"
 # Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]
 gem "importmap-rails"
@@ -20,7 +28,7 @@ gem "jbuilder"
 # gem "redis", ">= 4.0.1"
 
 gem "sassc-rails"
-gem 'bootstrap', '~> 5.3.0'
+gem "bootstrap", "~> 5.3.0"
 
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
