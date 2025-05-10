@@ -9,7 +9,8 @@ A fully functional and visually polished TODO application built with Ruby on Rai
 ## 👥 Team Members
 
 - Teddy Taussig (@Tttaussig33)
-- [Add other team members if applicable]
+- Nick Essery (@Nick-Essery)
+- Evan Lyons (@EvanL77)
 
 ## 🧩 Features
 
