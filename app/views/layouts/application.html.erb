@@ -64,9 +64,15 @@
           <ul class="navbar-nav">
             <% if logged_in? %>
               <li class="nav-item">
-                <span class="nav-link text-light">
-                  <i class="bi bi-person-circle me-1"></i>Hello, <%= current_user.first_name %>
-                </span>
+                <li class="nav-item">
+  <li class="nav-item">
+  <%= link_to user_path(current_user), class: "nav-link text-light px-2", style: "transition: color 0.3s;" do %>
+  <i class="bi bi-person-circle me-1"></i> Hello, <%= current_user.first_name %>
+<% end %>
+
+</li>
+
+
               </li>
               <li class="nav-item">
                 <%= link_to logout_path, data: { turbo_method: :delete }, class: "nav-link" do %>

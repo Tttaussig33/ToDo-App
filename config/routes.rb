@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   delete "logout", to: "sessions#destroy"
 
   # Users
-  resources :users, only: [ :show, :destroy ]
+  resources :users, only: [ :new, :create, :show, :destroy ]
 
   # Categories and nested todos (for category details showing its todos)
   resources :categories

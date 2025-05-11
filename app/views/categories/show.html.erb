@@ -12,31 +12,30 @@
 
 <% if @todos.any? %>
   <ul class="list-group mb-4">
-  <% @todos.each do |todo| %>
-    <li class="list-group-item d-flex justify-content-between align-items-center">
-      <div>
-        <%= link_to todo.title, todo_path(todo), class: "text-decoration-none text-primary fw-semibold" %>
+    <% @todos.each do |todo| %>
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        <div>
+          <%= link_to todo.title, todo_path(todo), class: "text-decoration-none text-primary fw-semibold" %>
 
-        <% if todo.priority %>
-          <span class="badge bg-danger ms-2">High Priority</span>
-        <% end %>
-      </div>
+          <% if todo.priority %>
+            <span class="badge bg-danger ms-2">High Priority</span>
+          <% end %>
+        </div>
 
-      <div class="d-flex align-items-center gap-2">
-        <%= link_to edit_todo_path(todo), class: "btn btn-sm btn-outline-primary" do %>
-          <i class="bi bi-pencil"></i>
-        <% end %>
+        <div class="d-flex align-items-center gap-2">
+          <%= link_to edit_todo_path(todo), class: "btn btn-sm btn-outline-primary" do %>
+            <i class="bi bi-pencil"></i>
+          <% end %>
 
-        <%= link_to todo_path(todo),
-            data: { turbo_method: :delete, turbo_confirm: "Delete this ToDo?" },
-            class: "btn btn-sm btn-outline-danger" do %>
-          <i class="bi bi-trash"></i>
-        <% end %>
-      </div>
-    </li>
-  <% end %>
-</ul>
-
+          <%= link_to todo_path(todo),
+              data: { turbo_method: :delete, turbo_confirm: "Delete this ToDo?" },
+              class: "btn btn-sm btn-outline-danger" do %>
+            <i class="bi bi-trash"></i>
+          <% end %>
+        </div>
+      </li>
+    <% end %>
+  </ul>
 <% else %>
   <p class="text-muted">No ToDos yet.</p>
 <% end %>
