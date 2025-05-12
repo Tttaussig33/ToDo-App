@@ -12,7 +12,7 @@ end
 
 # Use sqlite3 in production
 group :production do
-  gem "sqlite3", "~> 1.4"
+  gem "sqlite3", "~> 2.6"
 end
 
 gem "puma", ">= 5.0"
