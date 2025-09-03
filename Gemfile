@@ -7,7 +7,7 @@ gem "sprockets-rails"
 # Use postgresql as the database for Active Record
 # Use postgresql as the database for Active Record in development and test
 group :development, :test do
-  gem "pg", "~> 1.1"
+  gem "pg", "~> 1.6"
 end
 
 # Use sqlite3 in production
