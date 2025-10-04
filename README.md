@@ -2,11 +2,11 @@
 
 A fully functional and visually polished TODO application built with Ruby on Rails, featuring user authentication, task management, and categorized organization. This project is deployed live on Render and developed collaboratively as part of the COM214 final project.
 
-
-
 ##  Live Demo
 
  [View the deployed app on Render](https://todo-app-wkma.onrender.com)
+
+![ToDo Details Screenshot](screenshots/readme-screenshot.png)
 
 ##  Team Members
 
